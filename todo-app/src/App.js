@@ -8,6 +8,7 @@ function App() {
   const [allTodos, setTodos] = useState([])
   const [newTitle, setNewTitle] = useState("")
   const [newDescription, setNewDescription] = useState("")
+  const [completedTodo, setCompletedTodo] = useState([])
 
   const handleAddTodo = () =>{
     let newTodoItem = {
@@ -27,6 +28,27 @@ function App() {
     localStorage.setItem('todolist', JSON.stringify(updateTodos));
     setTodos(updateTodos)
   };
+
+  const handleCompleteTodo = (index) =>{
+    let now = new Date();
+    let dd = now.getDate();
+    let mm = now.getMonth();
+    let yyyy = now.getFullYear();
+    let h = now.getHours();
+    let m = now.getMinutes();
+    let s = now.getSeconds();
+    let completedOn = dd + '-' + mm + '-' + yyyy + 'at' + h + ':' +m + ':'+s;
+
+    let filteredUtem = {
+      ...allTodos[index],
+      completedOn: completedOn
+    }
+
+    let updatedCompleteArr = [...completedTodo];
+    updatedCompleteArr.push(filteredUtem);
+    setCompletedTodo(updatedCompleteArr);
+    handleDeleteTodo(index);
+  }
 
   useEffect(()=>{
     let saveTodo = JSON.parse(localStorage.getItem('todolist'))
@@ -62,7 +84,7 @@ function App() {
 
         <div className='todo-list'>
 
-         {allTodos.map((item, index)=>{
+         {isCompleteScreen === false && allTodos.map((item, index)=>{
           return(
             <div className='todo-list-item' key={index}>
               <div>
@@ -72,7 +94,23 @@ function App() {
 
               <div>
                 <AiOutlineDelete className='icon' onClick={()=>handleDeleteTodo(index)} title='Delete?'/>
-                <BsCheckLg className='check-icon' title='Complete?'/>
+                <BsCheckLg className='check-icon' onClick={()=>handleCompleteTodo(index)} title='Complete?'/>
+              </div>
+            </div>
+          )
+         })}
+
+          {isCompleteScreen === true && completedTodo.map((item, index)=>{
+          return(
+            <div className='todo-list-item' key={index}>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                <p><small>Completed on:{item.completedOn}</small></p>
+              </div>
+
+              <div>
+                <AiOutlineDelete className='icon' onClick={()=>handleDeleteTodo(index)} title='Delete?'/>
               </div>
             </div>
           )
