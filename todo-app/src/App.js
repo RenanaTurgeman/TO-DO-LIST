@@ -24,7 +24,7 @@ function App() {
 
   const handleDeleteTodo = (index) =>{
     let updateTodos = [...allTodos]
-    updateTodos.splice(index);
+    updateTodos.splice(index, 1);
     localStorage.setItem('todolist', JSON.stringify(updateTodos));
     setTodos(updateTodos)
   };
@@ -51,7 +51,12 @@ function App() {
     localStorage.setItem('completedTodos', JSON.stringify(updatedCompleteArr));
 
   }
-
+  const handleDeleteCompletedTodo = (index)=>{
+    let updateTodos = [...completedTodo]
+    updateTodos.splice(index, 1); // 1 sign we only want to delete one item
+    localStorage.setItem('completedTodos', JSON.stringify(updateTodos));
+    setCompletedTodo(updateTodos)
+  }
   useEffect(()=>{
     let saveTodo = JSON.parse(localStorage.getItem('todolist'))
     let saveCompletedTodo = JSON.parse(localStorage.getItem('completedTodos'))
@@ -115,7 +120,8 @@ function App() {
               </div>
 
               <div>
-                <AiOutlineDelete className='icon' onClick={()=>handleDeleteTodo(index)} title='Delete?'/>
+                <AiOutlineDelete className='icon' 
+                onClick={()=>handleDeleteCompletedTodo(index)} title='Delete?'/>
               </div>
             </div>
           )
