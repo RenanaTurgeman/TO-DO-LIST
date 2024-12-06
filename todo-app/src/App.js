@@ -21,6 +21,13 @@ function App() {
     localStorage.setItem('todolist', JSON.stringify(updateTodosArray))
   }
 
+  const handleDeleteTodo = (index) =>{
+    let updateTodos = [...allTodos]
+    updateTodos.splice(index);
+    localStorage.setItem('todolist', JSON.stringify(updateTodos));
+    setTodos(updateTodos)
+  };
+
   useEffect(()=>{
     let saveTodo = JSON.parse(localStorage.getItem('todolist'))
     if(saveTodo){
@@ -64,7 +71,7 @@ function App() {
               </div>
 
               <div>
-                <AiOutlineDelete className='icon' title='Delete?'/>
+                <AiOutlineDelete className='icon' onClick={()=>handleDeleteTodo(index)} title='Delete?'/>
                 <BsCheckLg className='check-icon' title='Complete?'/>
               </div>
             </div>
