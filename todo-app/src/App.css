@@ -1,158 +1,251 @@
-body{
-  background-color: lightblue;
-  color: darkslategray;
+/* הגדרת גופנים ו-Reset CSS */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #64B6AC;
+  --secondary-color: #5D737E;
+  --accent-color: #F28C28;
+  --update-color: #8A56AC; /* צבע מותאם אישית ל-update-icon */
+  --background-color: #F2F2F2;
+  --text-color: #333;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Poppins', sans-serif;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
-h1{
+h1 {
   text-align: center;
+  margin-bottom: 20px;
 }
 
-.todo-wrapper{
-  background: rgb(153, 192, 205) ;
-  padding: 2%;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
+.todo-wrapper {
+  background-color: var(--primary-color);
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px;
   margin-top: 3%;
   max-height: 80vh;
   overflow-y: auto;
-  box-shadow: 0px 5px 7px black;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
 }
 
-.todo-input{
+.todo-input {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   border-bottom: 1px solid gray;
-  padding-bottom: 25px;
-  margin-bottom: 25px;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
 }
 
-.todo-input-item{
+.todo-input-item {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-right: 25px;
+  flex: 1;
+  margin-right: 15px;
 }
 
-.todo-input-item label{
+.todo-input-item label {
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-.todo-input-item input{
-  padding: 8px;
-  border: none;
-  width: 250px;
+.todo-input-item input {
+  padding: 10px;
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  width: 100%;
+  transition: all 0.3s ease;
 }
 
-.todo-input-item input:focus{
+.todo-input-item input:focus {
   outline: none;
-  border: 2px solid blanchedalmond;
+  border: 2px solid var(--accent-color);
+  box-shadow: 0 0 5px var(--accent-color);
 }
 
-.primaryBtn{
-  background-color: blanchedalmond;
-  color: rgb(40, 78, 102);
+.primaryBtn {
+  background-color: var(--accent-color);
+  color: white;
   border: none;
-  border-radius: 0px;
-  margin-top: 10px;
-  padding: 10px;
-  width: 60px;
+  border-radius: 8px;
+  padding: 12px 20px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.primaryBtn:hover{
-  background-color: cadetblue;
+.primaryBtn:hover {
+  background-color: var(--secondary-color);
+  transform: scale(1.05);
 }
 
-.secondaryBtn{
-  background-color: rgb(207, 207, 207);
-  color: rgb(40, 78, 102);
+.secondaryBtn {
+  background-color: #d3d3d3;
+  color: var(--text-color);
   border: none;
-  border-radius: 0px;
-  margin-top: 10px;
-  padding: 10px;
-  width: fit-content;
+  border-radius: 8px;
+  padding: 12px 20px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.active{
-  background-color: bisque;
+.secondaryBtn:hover {
+  background-color: var(--primary-color);
 }
 
-.todo-list{
+.active {
+  background-color: var(--accent-color);
+}
+
+.todo-list {
   display: flex;
   flex-direction: column;
 }
 
-.btn-area{
+.btn-area {
   margin-bottom: 15px;
 }
 
-.todo-list-item{
-  background-color: rgb(115, 157, 171);
+.todo-list-item {
+  background-color: var(--secondary-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  margin-bottom: 10px;
-  box-shadow: 0px 3px 5px rgb(43, 42, 42);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  animation: fadeIn 0.5s ease;
 }
 
-.todo-list-item h3{
-  font-size: 25px;
-  color: rgb(245, 223, 223);
+.todo-list-item:hover {
+  transform: translateY(-5px);
+}
+
+.todo-list-item h3 {
+  font-size: 20px;
+  color: white;
   font-weight: bold;
   margin: 0;
 }
 
-.todo-list-item p{
+.todo-list-item p {
   font-size: 14px;
-  color: rgb(246, 230, 230);
+  color: white;
   margin-top: 8px;
 }
 
-.icon{
-  font-size: 35px;
-  cursor: pointer;
-  gap: 1px;
-}
-
-.icon:hover{
-  color: red;
-}
-
-.check-icon{
+.icon {
   font-size: 25px;
-  margin-left: 5x;
-  color:rgb(44, 97, 72);
+  color: white;
   cursor: pointer;
+  margin-left: 10px;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.check-icon:hover{
-  color: rgb(30, 236, 140);
+.icon:hover {
+  color: var(--accent-color);
+  transform: scale(1.2);
 }
 
-.edit_wrapper{
- background-color:  rgb(230, 226, 221);
- padding: 10px;
- display: flex;
- flex-direction: column;
+.check-icon {
+  font-size: 25px;
+  color: var(--accent-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.edit_wrapper input, .edit_wrapper textarea{
-  border: 1px solid lightblue;
-  padding: 5px 10px;
-  margin: 5px;
+.check-icon:hover {
+  color: var(--secondary-color);
+  transform: scale(1.2);
 }
 
-.edit_wrapper .primaryBtn{
-  margin: auto;
+.update-icon {
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: all 0.3s ease;
+}
+
+.update-icon:hover {
+  color: var(--accent-color);
+  transform: rotate(20deg) scale(1.2);
+}
+
+.edit_wrapper {
+  background-color: var(--background-color);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+}
+
+.edit_wrapper input, 
+.edit_wrapper textarea {
+  border: 1px solid var(--primary-color);
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+}
+
+.edit_wrapper .primaryBtn {
+  margin: 0 auto;
   padding: 10px;
   font-size: 16px;
   width: fit-content;
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.edit_wrapper .primaryBtn:hover {
+  background-color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+  .todo-wrapper {
+    width: 100%; 
+    max-height: 70vh;
+  }
+
+  .todo-input-item input {
+    width: 100%; 
+  }
+
+  .todo-list-item {
+    padding: 15px;
+  }
+
+  .primaryBtn, 
+  .secondaryBtn {
+    width: 100%; 
+  }
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
 }
